@@ -1,0 +1,79 @@
+<div class="main-grid" *ngIf="isReady; else notReady">
+  <div class="add m-0">
+    <p class="text-center font-bold text-2xl">Создать</p>
+    <div class="grid grid-cols-11">
+      <input class="col-span-2 outline-0 bg-cyan-200 p-2 rounded" type="text" placeholder="Название" [(ngModel)]="adding.name">
+      <textarea class="col-span-5 mx-3 outline-0 bg-cyan-200 p-2 rounded resize-none" placeholder="Информация" [(ngModel)]="adding.info"></textarea>
+      <select  class="col-span-2"  [(ngModel)]="adding.authorId">
+        <option value=0>Выберите автора</option>
+        <option *ngFor="let author of authors" [value]=author.id>
+          {{author.firstName + " "+author.middleName+" "+author.lastName}}
+        </option>
+      </select>
+      <button class="col-span-2 text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3"
+      (click)="add()">Добавить</button>
+    </div>
+  </div>
+
+  <div class="nav flex flex-col pl-3 pt-10">
+    <p class="text-center font-bold text-3xl mb-3">Книга {{updating.id}}</p>
+    <input class="text-2xl mb-5 mx-3 outline-0 bg-cyan-200 px-3 py-2 rounded" type="text" placeholder="Название" [(ngModel)]="updating.name">
+    <textarea class="h-[150px] text-2xl resize-none mx-3 outline-0 bg-cyan-200 px-3 py-2 rounded" placeholder="Информация" [(ngModel)]="updating.info"></textarea>
+    <select  class="mb-10 text-2xl outline-0"  [(ngModel)]="updating.authorId">
+      <option value=0>Выберите автора</option>
+      <option *ngFor="let author of authors" [value]=author.id>
+        {{author.firstName + " "+author.middleName+" "+author.lastName}}
+      </option>
+    </select>
+    <div class="items-center flex flex-col justify-center mb-10">
+      <p class="text-center font-bold text-3xl mb-2">Доступность</p>
+      <input class="block w-10 h-10" type="checkbox" [(ngModel)]="updating.available">
+    </div>
+    <button class="col-span-2 text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3"
+            (click)="update()">Изменить</button>
+  </div>
+
+  <div class="main">
+    <div class="grid grid-cols-9 gap-4 table-grid font-bold my-3 bg-blue-100 px-2 rounded-2xl py-2 text-center table-grid-books">
+      <div class="col-span-1">Id</div>
+      <div class="col-span-1">Название</div>
+      <div class="col-span-1">Доступность</div>
+      <div class="col-span-1">Id автора</div>
+      <div class="col-span-1">Имя</div>
+      <div class="col-span-1">Отчество</div>
+      <div class="col-span-1">Фамилия</div>
+    </div>
+
+    <div *ngFor="let book of books" class="grid table-grid grid-cols-9 gap-4 px-2 rounded-2xl py-2 table-grid-books text-center">
+      <div class="col-span-1">{{book.id}}</div>
+      <div class="col-span-1">{{book.name}}</div>
+
+      <div class="col-span-1 flex flex-row justify-center">
+        <div *ngIf="book.available; else notAvailable">
+        <div class="bg-contain bg-no-repeat bg-[url('img/true.png')] h-[40px] w-[40px]"></div>
+
+        </div>
+        <ng-template #notAvailable>
+          <div class="bg-contain bg-no-repeat bg-[url('img/false.png')] h-[40px] w-[40px]"></div>
+        </ng-template>
+      </div>
+
+
+
+      <div class="col-span-1">{{book.authorId}}</div>
+      <div class="col-span-1">{{book.author.firstName}}</div>
+      <div class="col-span-1">{{book.author.middleName}}</div>
+      <div class="col-span-1">{{book.author.lastName}}</div>
+      <div class="cursor-pointer bg-contain bg-no-repeat bg-[url('img/delete.png')] h-[40px] w-[40px]" (click)="delete(book.id)">
+
+      </div>
+      <div class="cursor-pointer bg-contain bg-no-repeat bg-[url('img/arrow.png')] h-[40px] w-[40px]" (click)="toUpdate(book.id)">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notReady class="container justify-center text-center">
+  <p class="text-center font-extrabold text-7xl text-blue-600 mt-[300px]">Загрузка</p>
+</ng-template>

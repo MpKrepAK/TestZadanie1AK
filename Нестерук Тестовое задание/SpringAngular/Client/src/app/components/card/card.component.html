@@ -1,0 +1,38 @@
+<div class="flex items-center py-4 px-6 flex-col rounded mb-2 border">
+
+<!--    <div [style.background-image]="'url(' + product.image + ')'" class="w-[300px] bg-no-repeat bg-contain bg-center h-[300px] mb-2"></div>-->
+
+    <div class="py-3 px-4 font-extrabold text-3xl">{{book.name}}</div>
+    <p class="text-2xl">Автор: <span class="font-bold">{{book.author.firstName+" "+book.author.middleName+" "+book.author.lastName}}</span></p>
+<!--    <p class="text-2xl">Автор: <span class="font-bold">{{book.authorId}}</span></p>-->
+
+    <button class=" rounded py-5 px-10 mt-10 font-semibold text-2xl"
+            [ngClass]="{
+                'bg-green-400' : !daitails,
+                'bg-red-400' : daitails
+            }"
+    (click)="daitails=!daitails">{{daitails ? "Закрыть описание" : "Открыть описание"}}</button>
+
+
+
+    <div *ngIf="daitails" class="flex flex-col justify-center items-center text-center">
+        <p class="text-center font-semibold mt-4 text-[20pt]">{{book.available ? "Доступна" : "Недоступна"}}</p>
+
+      <div *ngIf="!book.available; else available">
+        <div *ngIf="isHolder">
+          <button class="col-span-1 text-3xl py-2 w-[300px] bg-red-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3 px-10 py-3 font-bold"
+                  (click)="return()">Вернуть</button>
+
+      </div>
+      </div>
+      <ng-template #available>
+        <button class="col-span-1 text-3xl py-2 w-[300px] bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3 px-10 py-3 font-bold"
+                (click)="get()">Взять</button>
+      </ng-template>
+        <p class="w-1/2 italic my-4 font-light text-[16pt]">{{book.info}}</p>
+    </div>
+  <div>
+  </div>
+
+
+</div>

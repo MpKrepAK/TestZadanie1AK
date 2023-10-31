@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.main-grid{
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 100px auto;
+  grid-template-areas:
+  "add nav"
+  "main nav";
+}
+
+.add{
+  grid-area: add;
+}
+
+.nav{
+  grid-area: nav;
+}
+
+.main{
+  grid-area: main;
+}
+
+.table-grid-authors{
+  grid-template-columns: 0.3fr 1fr 1fr 1fr 0.3fr 0.3fr;
+
+}
+
+.table-grid-books{
+  grid-template-columns: 0.3fr 1fr 0.3fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr;
+
+}
+
+.table-grid-users{
+  grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr 0.3fr 0.3fr;
+
+}

@@ -1,0 +1,41 @@
+<div class="grid grid-cols-4 gap-10" *ngIf="isReady; else notReady">
+  <div>
+
+
+    <p class="text-center font-bold text-5xl mb-6">Фильтры</p>
+    <p class=" mx-3 text-3xl mb-6">Id</p>
+    <input type="number" placeholder="Введите код книги" [(ngModel)]="selectedId" class="mb-5 mx-3 text-2xl outline-0 bg-cyan-200 px-3 py-2 rounded w-full">
+    <p class=" mx-3 text-3xl mb-6">Название</p>
+    <input type="text" placeholder="Введите название книги" [(ngModel)]="selectedName" class="mb-5 mx-3 text-2xl outline-0 bg-cyan-200 px-3 py-2 rounded w-full">
+
+    <p class=" mx-3 text-3xl mb-6">Доступность</p>
+    <label class="mb-5 mx-3 text-2xl outline-0 px-3 py-2 rounded w-full block">
+      <input type="radio" name="isAvailable" value="0" [(ngModel)]="selectedValue" placeholder="Введите название книги" class="mr-6 w-4 h-4">Все
+    </label>
+    <label class="mb-5 mx-3 text-2xl outline-0 px-3 py-2 rounded w-full block">
+      <input type="radio" name="isAvailable" value="1" [(ngModel)]="selectedValue" placeholder="Введите название книги" class="mr-6 w-4 h-4">Недоступные
+    </label>
+    <label class="mb-5 mx-3 text-2xl outline-0 px-3 py-2 rounded w-full block">
+      <input type="radio" name="isAvailable" value="2" [(ngModel)]="selectedValue" placeholder="Введите название книги" class="mr-6 w-4 h-4">Доступные
+    </label>
+    <label class="mb-5 mx-3 text-2xl outline-0 px-3 py-2 rounded w-full block">
+      <input type="radio" name="isAvailable" value="3" [(ngModel)]="selectedValue" placeholder="Введите название книги" class="mr-6 w-4 h-4">У вас
+    </label>
+
+    <button class="col-span-1 text-3xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3 px-10 py-3 font-bold"
+            (click)="filtering()">Отправить</button>
+
+  </div>
+
+  <div class="col-span-3" *ngIf="books.length!=0 || authors.length!=0">
+    <div *ngFor="let product of books">
+      <app-card [product]="product"></app-card>
+    </div>
+  </div>
+
+</div>
+
+
+<ng-template #notReady class="container justify-center text-center">
+  <p class="text-center font-extrabold text-7xl text-blue-600 mt-[300px]">Загрузка</p>
+</ng-template>

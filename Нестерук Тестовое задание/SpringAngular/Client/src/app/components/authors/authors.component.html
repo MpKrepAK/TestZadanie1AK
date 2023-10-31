@@ -1,0 +1,49 @@
+<div class="main-grid" *ngIf="isReady; else notReady">
+  <div class="add h-[5px] m-0 mb-10">
+    <p class="text-center font-bold text-2xl">Создать</p>
+    <div class="grid grid-cols-4">
+      <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded" type="text" placeholder="Имя" [(ngModel)]="adding.firstName">
+      <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded" type="text" placeholder="Фамилия" [(ngModel)]="adding.lastName">
+      <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded" type="text" placeholder="Отчество" [(ngModel)]="adding.middleName">
+      <button class="col-span-1 text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3"
+              (click)="add()">Добавить</button>
+    </div>
+  </div>
+
+  <div class="nav flex flex-col pl-3 pt-10">
+    <p class="text-center font-bold text-3xl mb-3">Автор {{updating.id}}</p>
+    <input class="mb-5 mx-3 text-2xl outline-0 bg-cyan-200 px-3 py-2 rounded" type="text" placeholder="Имя" [(ngModel)]="updating.firstName">
+    <input class="mb-5 mx-3 text-2xl outline-0 bg-cyan-200 px-3 py-2 rounded" type="text" placeholder="Фамилия" [(ngModel)]="updating.lastName">
+    <input class="mb-5 mx-3 text-2xl outline-0 bg-cyan-200 px-3 py-2 rounded" type="text" placeholder="Отчество" [(ngModel)]="updating.middleName">
+
+    <button class="col-span-2 text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3"
+            (click)="update()">Изменить</button>
+  </div>
+
+  <div class="main">
+    <div class="grid grid-cols-4 gap-4 table-grid font-bold my-3 bg-blue-100 px-2 table-grid-authors rounded-2xl py-2 text-center">
+      <div class="">Id</div>
+      <div class="">Имя</div>
+      <div class="">Фамилия</div>
+      <div class="">Отчество</div>
+    </div>
+
+    <div *ngFor="let author of authors" class="grid table-grid grid-cols-6 table-grid-authors gap-4 px-2 rounded-2xl py-2  text-center">
+      <div class="">{{author.id}}</div>
+      <div class="">{{author.firstName}}</div>
+      <div class="">{{author.lastName}}</div>
+      <div class="">{{author.middleName}}</div>
+
+      <div class="cursor-pointer bg-contain bg-no-repeat bg-[url('img/delete.png')] h-[40px] w-[40px]" (click)="delete(author.id)">
+
+      </div>
+      <div class="cursor-pointer bg-contain bg-no-repeat bg-[url('img/arrow.png')] h-[40px] w-[40px]" (click)="toUpdate(author.id)">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #notReady class="container justify-center text-center">
+  <p class="text-center font-extrabold text-7xl text-blue-600 mt-[300px]">Загрузка</p>
+</ng-template>

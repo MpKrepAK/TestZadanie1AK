@@ -1,0 +1,14 @@
+<div class="grid grid-cols-6 gap-10">
+  <div class="flex flex-col">
+    <button class="text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3" (click)="page = 'author'">Авторы</button>
+    <button class="text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3" (click)="page = 'book'">Книги</button>
+    <button class="text-2xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3" (click)="page = 'user'">Пользователи</button>
+
+  </div>
+
+  <div [ngSwitch]="page" class="col-span-5">
+    <app-authors *ngSwitchCase="'author'"></app-authors>
+    <app-books *ngSwitchCase="'book'"></app-books>
+    <app-users *ngSwitchCase="'user'"></app-users>
+  </div>
+</div>

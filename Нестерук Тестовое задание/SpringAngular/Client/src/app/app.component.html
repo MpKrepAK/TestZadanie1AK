@@ -1,0 +1,41 @@
+<div class="text-center mb-2 p-10 font-bold text-lg flex flex-row bg-blue-200" *ngIf="isReady; else notReady">
+  <button class="font-extrabold text-5xl"
+  (click)="reload()">Библиотека</button>
+  <ul class="justify-self-start ml-auto flex">
+    <li>
+      <button class="text-2xl px-10 py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mr-10" (click)="this.selectedComponent = 'catalog'">Каталог</button>
+    </li>
+    <li>
+      <button class="text-2xl px-10 py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mr-3" (click)="this.selectedComponent = 'admin'">Админка</button>
+    </li>
+    <li>
+      <button class="text-2xl px-10 py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mr-3" (click)="this.selectedComponent = 'register'">Регистрация</button>
+    </li>
+  </ul>
+
+
+</div>
+
+<div class="max-w-1xl px-10 mx-auto" *ngIf="isReady">
+
+  <div [ngSwitch]="selectedComponent">
+    <app-catalog *ngSwitchCase="'catalog'"></app-catalog>
+    <app-admin *ngSwitchCase="'admin'"></app-admin>
+    <app-registration *ngSwitchCase="'register'"></app-registration>
+    <div *ngSwitchCase="''" class="ml-auto mr-auto w-1/2 align-middle mt-[100px] flex flex-col items-center bg-yellow-100 px-[100px] py-[70px] rounded-2xl shadow-2xl">
+      <p class="font-extrabold text-7xl text-center mb-10">Вход</p>
+      <select class="block text-3xl mb-10 mx-3 outline-0 bg-cyan-200 px-3 py-2 rounded" [(ngModel)]="selectedUserId">
+        <option value=0>Выберите пользователя</option>
+        <option *ngFor="let user of users" [value]=user.id>
+          {{user.firstName + " "+user.middleName+" "+user.lastName}}
+        </option>
+      </select>
+      <button class="col-span-1 text-3xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3 px-10 py-3 font-bold"
+              (click)="select()">Выбрать</button>
+    </div>
+  </div>
+</div>
+
+<ng-template #notReady class="container justify-center text-center">
+  <p class="text-center font-extrabold text-7xl text-blue-600 mt-[300px]">Загрузка</p>
+</ng-template>

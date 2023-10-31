@@ -1,0 +1,9 @@
+<div class="ml-auto mr-auto w-1/2 align-middle mt-[100px] flex flex-col items-center bg-yellow-100 px-[100px] py-[70px] rounded-2xl shadow-2xl">
+  <p class="font-extrabold text-7xl text-center mb-10">Регистрация</p>
+  <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded block mb-3 text-3xl" type="text" placeholder="Имя" [(ngModel)]="adding.firstName">
+  <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded block mb-3 text-3xl" type="text" placeholder="Фамилия" [(ngModel)]="adding.lastName">
+  <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded block mb-3 text-3xl" type="text" placeholder="Отчество" [(ngModel)]="adding.middleName">
+  <input class="col-span-1 mr-3 outline-0 bg-cyan-200 p-2 rounded block mb-10 text-3xl" type="text" placeholder="Паспорт" [(ngModel)]="adding.pasportNumber">
+  <button class="col-span-1 text-3xl py-2 bg-green-400 rounded-2xl hover:bg-yellow-300 transition duration-300 ease-in-out mb-3 px-10 py-3 font-bold"
+          (click)="add()">Отправить</button>
+</div>
